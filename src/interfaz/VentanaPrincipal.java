@@ -16,9 +16,11 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaPrincipal extends JFrame implements ActionListener{
 
 	private JPanel contenedor;
+	JButton btnMostrarAlumnos;
+	JButton btnMostrarEmpresas;
 
 	/**
 	 * Launch the application.
@@ -69,7 +71,7 @@ public class VentanaPrincipal extends JFrame {
 		JMenu mnAyuda = new JMenu("Ayuda");
 		menuBar.add(mnAyuda);
 		
-		JButton btnMostrarAlumnos = new JButton("MOSTRAR ALUMNOS");
+		btnMostrarAlumnos = new JButton("MOSTRAR ALUMNOS");
 		btnMostrarAlumnos.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/resources/alumno.png")));
 		btnMostrarAlumnos.setFocusPainted(false);
 		btnMostrarAlumnos.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -83,7 +85,7 @@ public class VentanaPrincipal extends JFrame {
 		btnRegistrarAlumno.setBounds(12, 185, 168, 32);
 		contenedor.add(btnRegistrarAlumno);
 		
-		JButton btnMostrarEmpresas = new JButton("MOSTRAR EMPRESAS");
+		btnMostrarEmpresas = new JButton("MOSTRAR EMPRESAS");
 		btnMostrarEmpresas.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/resources/empresa.png")));
 		btnMostrarEmpresas.setFocusPainted(false);
 		btnMostrarEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -102,5 +104,33 @@ public class VentanaPrincipal extends JFrame {
 		etFondo.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/resources/fisi_unmsm.jpg")));
 		etFondo.setBounds(0, 21, 794, 551);
 		contenedor.add(etFondo);
+		
+		btnMostrarAlumnos.addActionListener(this);
+		btnMostrarEmpresas.addActionListener(this);
+		
+		//falta implementar la ventan de administradores...
+	}
+	
+
+	@Override
+	public void actionPerformed(ActionEvent evento) {
+		if (evento.getSource() == btnMostrarAlumnos) {
+			/*
+			 * enviamos la instancia de la ventana principal para que esta sea
+			 * Padre de la ventana de dialogo
+			 */
+			VentanaAlumno miVentanaAlumno = new VentanaAlumno(this, true);
+			miVentanaAlumno.setVisible(true);
+		}
+		else if(evento.getSource() == btnMostrarEmpresas){
+
+			VentanaEmpresa miVentanaEmpresa = new VentanaEmpresa(this, true);
+			miVentanaEmpresa.setVisible(true);
+		}
+		else {
+			
+			
+			
+		}	
 	}
 }
